@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program {
+    static void Main(string[] args) {
+        List<double> numbers = new List<double>();
+        while (true) {
+            Console.Write("Enter a number (type 'End' to stop): ");
+            string input = Console.ReadLine();
+            if (input == "End") {
+                break;
+            }
+            double number = Convert.ToDouble(input);
+            numbers.Add(number);
+        }
+        while (true) {
+            Console.Write("Enter a mode (FindMax, FindMin, FindMean): ");
+            string mode = Console.ReadLine();
+            if (mode == "FindMax") {
+                double max = numbers.Max();
+                Console.WriteLine("The maximum number is: " + max);
+                break;
+            }
+            else if (mode == "FindMin") {
+                double min = numbers.Min();
+                Console.WriteLine("The minimum number is: " + min);
+                break;
+            }
+            else if (mode == "FindMean") {
+                double mean = numbers.Average();
+                Console.WriteLine("The mean of the numbers is: " + mean);
+                break;
+            }
+            else {
+                Console.WriteLine("Invalid mode");
+            }
+        }
+        Console.ReadLine();
+    }
+}
