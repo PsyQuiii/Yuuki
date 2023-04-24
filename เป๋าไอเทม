@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+
+class Item
+{
+    public string Name { get; set; }
+    public string Type { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the number of items in your bag: ");
+        int numItems = int.Parse(Console.ReadLine());
+
+        List<Item> items = new List<Item>();
+
+        for (int i = 0; i < numItems; i++)
+        {
+            Console.WriteLine($"Enter the details of item {i+1}:");
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Type: ");
+            string type = Console.ReadLine();
+
+            items.Add(new Item { Name = name, Type = type });
+        }
+
+        while (true)
+        {
+            Console.Write("\nEnter search mode (or type 'End' to quit): ");
+            string searchMode = Console.ReadLine();
+
+            if (searchMode == "End")
+            {
+                Console.WriteLine("End");
+                break;
+            }
+
+            if (searchMode == "ShowAll")
+            {
+                Console.WriteLine("\nAll items in the bag:");
+                foreach (Item item in items)
+                {
+                    Console.WriteLine($"{item.Name} ({item.Type})");
+                }
+                continue;
+            }
+
+            Console.WriteLine($"\nItems of type '{searchMode}':");
+            foreach (Item item in items)
+            {
+                if (item.Type == searchMode)
+                {
+                    Console.WriteLine($"{item.Name}");
+                }
+            }
+        }
+    }
+}
