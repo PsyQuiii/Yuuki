@@ -1,0 +1,70 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        
+        Console.Write("Enter the input image file path: ");
+        string inputImagePath = Console.ReadLine();
+
+       
+        Console.Write("Enter the convolution kernel file path: ");
+        string kernelPath = Console.ReadLine();
+
+        Console.Write("Enter the output image file path: ");
+        string outputImagePath = Console.ReadLine();
+
+     
+        double[,] imageData = ReadImageDataFromFile(inputImagePath);
+
+     
+        double[,] kernelData = ReadImageDataFromFile(kernelPath);
+
+        double[,] convolvedData = Convolve(imageData, kernelData);
+
+    
+        WriteImageDataToFile(outputImagePath, convolvedData);
+    }
+
+    static double[,] ReadImageDataFromFile(string filePath)
+    {
+      
+        int width, height;
+        using (var reader = new BinaryReader(File.OpenRead(filePath)))
+        {
+            width = reader.ReadInt32();
+            height = reader.ReadInt32();
+        }
+
+    
+        double[,] imageData = new double[height, width];
+
+        using (var reader = new BinaryReader(File.OpenRead(filePath)))
+        {
+            
+            reader.ReadInt32();
+            reader.ReadInt32();
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    imageData[y, x] = reader.ReadDouble();
+                }
+            }
+        }
+
+        return imageData;
+    }
+
+    static double[,] Convolve(double[,] imageData, double[,] kernelData)
+    {
+      
+        int kernelWidth = kernelData.GetLength(1);
+        int kernelHeight = kernelData.GetLength(0);
+
+        
+    }
+}
