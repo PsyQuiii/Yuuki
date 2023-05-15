@@ -1,0 +1,86 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number of cities: ");
+        int n = int.Parse(Console.ReadLine());
+
+        Dictionary<int, string> cities = new Dictionary<int, string>();
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write("Enter city {i} name: ");
+            string name = Console.ReadLine();
+
+            int id = -1;
+            while (id == -1 || cities.ContainsKey(id))
+            {
+                Console.Write("Enter city {name} contact city ID: ");
+                id = int.Parse(Console.ReadLine());
+
+                if (id < 0 || id >= n)
+                {
+                    Console.WriteLine("Invalid ID");
+                    id = -1;
+                }
+                else if (cities.ContainsKey(id))
+                {
+                    Console.WriteLine("City already exists");
+                    id = -1;
+                }
+            }
+
+            cities.Add(id, name);
+        }
+
+        Console.WriteLine("City List:");
+        foreach (KeyValuePair<int, string> city in cities)
+        {
+            Console.WriteLine("{city.Key}\t{city.Value}\tLevel 0");
+        }
+
+        Console.Write("Enter an event (Outbreak, Vaccinate, Lockdown): ");
+        string eventName = Console.ReadLine();
+
+        int eventCityId = -1;
+        switch (eventName)
+        {
+            case "Outbreak":
+            case "Vaccinate":
+            case "Lockdown":
+                while (eventCityId == -1 || !cities.ContainsKey(eventCityId))
+                {
+                    Console.Write("Enter city ID: ");
+                    eventCityId = int.Parse(Console.ReadLine());
+
+                    if (!cities.ContainsKey(eventCityId))
+                    {
+                        Console.WriteLine("Invalid city ID");
+                        eventCityId = -1;
+                    }
+                }
+                break;
+        }
+
+        switch (eventName)
+        {
+            case "Outbreak":
+                Console.WriteLine("Outbreak in {cities[eventCityId]}!");
+                Console.WriteLine("Level 1 in {cities[eventCityId]}!");
+                break;
+            case "Vaccinate":
+                Console.WriteLine("Vaccination in {cities[eventCityId]}!");
+                Console.WriteLine("Level -1 in {cities[eventCityId]}!");
+                break;
+            case "Lockdown":
+                Console.WriteLine("Lockdown in {cities[eventCityId]}!");
+                Console.WriteLine("Level 2 in {cities[eventCityId]}!");
+                break;
+            default:
+                Console.WriteLine("Invalid event name");
+                break;
+        }
+    }
+}
