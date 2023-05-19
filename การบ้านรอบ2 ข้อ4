@@ -1,0 +1,31 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] input = Console.ReadLine().Split(' ');
+        int N = int.Parse(input[0]);
+        int K = int.Parse(input[1]);
+
+        int[] populations = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+
+        int maxCustomers = GetMaxCustomers(N, K, populations);
+        Console.WriteLine(maxCustomers);
+    }
+
+    static int GetMaxCustomers(int N, int K, int[] populations)
+    {
+        int maxCustomers = 0;
+        for (int i = 0; i <= N - K; i++)
+        {
+            int sum = 0;
+            for (int j = i; j < i + K; j++)
+            {
+                sum += populations[j];
+            }
+            maxCustomers = Math.Max(maxCustomers, sum);
+        }
+        return maxCustomers;
+    }
+}
