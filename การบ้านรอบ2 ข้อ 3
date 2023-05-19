@@ -1,0 +1,43 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        bool continueProgram = true;
+
+        while (continueProgram)
+        {
+            Console.Write("กรุณากรอกอักขระ: ");
+            char inputChar = char.Parse(Console.ReadLine());
+
+            if (inputChar == '+' || inputChar == '-')
+            {
+                Console.Write("กรุณากรอกขนาดของเมทริกซ์: ");
+                int matrixSize = int.Parse(Console.ReadLine());
+
+                Console.Write("กรุณากรอกสมาชิกของเมทริกซ์: ");
+                double matrixElement = double.Parse(Console.ReadLine());
+
+                double result = 0;
+
+                if (inputChar == '+')
+                {
+                    result = matrixSize + matrixElement;
+                }
+                else if (inputChar == '-')
+                {
+                    result = matrixSize - matrixElement;
+                }
+
+                Console.WriteLine("ผลลัพธ์: " + result);
+            }
+            else
+            {
+                break;
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
