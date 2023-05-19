@@ -1,0 +1,42 @@
+ Console.WriteLine();
+        }
+    }
+
+    static bool IsValidSequence(string sequence)
+    {
+        foreach (char basePair in sequence)
+        {
+            if (basePair != 'A' && basePair != 'T' && basePair != 'G' && basePair != 'C')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static string ReplicateSequence(string sequence)
+    {
+        string replicatedSequence = "";
+
+        foreach (char basePair in sequence)
+        {
+            switch (basePair)
+            {
+                case 'A':
+                    replicatedSequence += 'T';
+                    break;
+                case 'T':
+                    replicatedSequence += 'A';
+                    break;
+                case 'G':
+                    replicatedSequence += 'C';
+                    break;
+                case 'C':
+                    replicatedSequence += 'G';
+                    break;
+            }
+        }
+
+        return replicatedSequence;
+    }
+}
